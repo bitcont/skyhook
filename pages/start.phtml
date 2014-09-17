@@ -1,6 +1,6 @@
 <?php
 $title = 'Project Skyhook';
-$styles = ['/assets/css/skyhook.css'];
+$styles = ['/assets/css/skyhook.css', '/assets/coinee/css/style.css'];
 $classes = ['start'];
 include 'head.phtml';
 ?>
@@ -9,6 +9,17 @@ include 'head.phtml';
 		background-image: url('<?= Localization::url('images/Bitcoin-Logo.png') ?>');
 	}
 </style>
+
+
+<div class="half-screen buy-btc">
+	buy btc
+</div>
+
+<div class="half-screen coinee">
+	coinee
+</div>
+
+
 <a href="#" id="language-selector" class="button">
 	<img src="<?= Localization::flagURL() ?>" alt="" />
 </a>
@@ -34,5 +45,6 @@ $scripts = [
 	'/assets/js/HelpPanel.js',
 	'/assets/js/start.js',
 	'/assets/js/NetworkTest.js',
+	'/assets/coinee/js/start.js'
 ];
 include 'foot.phtml';

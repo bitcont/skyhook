@@ -1,0 +1,13 @@
+
+
+html, body {
+	height: 100%;
+}
+
+div.half-screen {
+	height: 50%;
+}
+
+div.coinee {
+	background-image: url('../images/logo.png')
+}

@@ -108,11 +108,13 @@ $result = $router->resolve(
 		['/finalize/:ticket$', Router::lazyLoad('Controllers\Ajax\FinalizePurchase')],
 		['/ajax', Router::lazyLoad('Controllers\Ajax')],
 		['/validate/:address$', Router::lazyLoad('Controllers\Ajax\ValidateBitcoinAddress')],
+		['/coinee-get-transfer/:address$', Router::lazyLoad('Coinee\Controllers\GetTransfer')],
 		['/add-email-to-ticket/:ticket', Router::lazyLoad('Controllers\Ajax\AddEmailToTicket')],
 		['/nettest', Router::lazyLoad('Controllers\NetworkTester')],
 		['/receipt/:ticket$', Router::lazyLoad('Controllers\Receipt')],
 		['/error/:ticket$', Router::lazyLoad('Controllers\Error')],
 		['/purchase/:address/:ticket$', Router::lazyLoad('Controllers\FinishPurchase')],
+		['/coinee/purchase/:address/:ticket$', Router::lazyLoad('Coinee\Controllers\FinishPurchase')],
 		['/price$', Router::lazyLoad('Controllers\Price')],
 		['/billscan-balance/:ticket$', Router::lazyLoad('Controllers\BillScannerBalance')],
 		['/email-receipt', Router::lazyLoad('Controllers\EmailReceipt')],
@@ -123,7 +125,9 @@ $result = $router->resolve(
 		
 		['/start$', Router::lazyLoad('Controllers\Start')],
 		['/account$', Router::lazyLoad('Controllers\Account')],
+		['/coinee-start$', Router::lazyLoad('Coinee\Controllers\Start')],
 		['/purchase/:address$', Router::lazyLoad('Controllers\StartPurchase')],
+		['/coinee/purchase/:address$', Router::lazyLoad('Coinee\Controllers\StartPurchase')],
 		['/bust$', Router::lazyLoad('Controllers\CacheBust')],
 		['/?$', Router::lazyLoad('Controllers\Start')],
 		['', function () {
