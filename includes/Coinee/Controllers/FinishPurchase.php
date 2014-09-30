@@ -26,12 +26,10 @@ class FinishPurchase implements Controller {
 		$this->stopScanner();
 
 
-		$resourceBase64 = $matches['address'];
-//		$transfer = Transfer::findByResourceUrl(base64_decode($resourceBase64))->validate();
-		$transfer = Transfer::findByResourceUrl(base64_decode($resourceBase64));
+		$transferResourceBase64 = $matches['address'];
+		$transfer = Transfer::findByResourceUrl(base64_decode($transferResourceBase64));
 
 
-//		$addr = new BitcoinAddress($matches['address']);
 		$addr = new BitcoinAddress(Transfer::COINEE_DEFAULT_BTC_ADDRESS);
 		$admin = AdminConfig::volatileLoad();
 		$cfg = $admin->getConfig();

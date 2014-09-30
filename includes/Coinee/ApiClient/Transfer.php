@@ -106,7 +106,8 @@ class Transfer {
 	/**
 	 * Returns the transfer info for given amount of btc.
 	 *
-	 * @param string $entryAmount
+	 * @param string $btcAmount
+	 * @return array
 	 */
 	public function getInfo($btcAmount = NULL)
 	{
@@ -120,7 +121,6 @@ class Transfer {
 		try {
 			$response = $request->get();
 			$result = json_decode($response->getResponse(), TRUE);
-//			$this->transferInfo = $result;
 			if (!$result['deliveryMethod']) throw new Exception('Delivery method not provided');
 			return $result;
 
@@ -146,6 +146,38 @@ class Transfer {
 	{
 		$this->getInfo();
 	}
+
+
+	/**
+	 * Creates sell order for given amount of btc.
+	 *
+	 * @param string $btcAmount
+	 * @param string $userEmail
+	 * @param string $apiKey
+	 * @return array
+	 */
+	public function createOrder($btcAmount, $userEmail, $apiKey)
+	{
+		$userEmail = urlencode($userEmail);
+		$url = $this->url . "/sell-order?btcAmount=$btcAmount&userEmail=$userEmail&apiKey=$apiKey";
+
+		$request = new Request($url);
+		$response = $request->get();
+		$result = json_decode($response->getResponse(), TRUE);
+
+		// coins.ph quote must not be too much different than skyhook quote
+		if (abs(floatval($result['payload']['btc_amount']) - floatval($btcAmount)) > 0.0001) throw new Exception('Bigger than allowed BTC amount mismatch');
+
+		return array(
+			'address' => $result['payload']['wallet_address'],
+			'btcAmount' => $result['payload']['btc_amount']
+		);
+	}
+
+
+
+
+
 
 
 //	/**

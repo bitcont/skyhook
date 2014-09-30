@@ -19,6 +19,7 @@ use Purchase;
 use BillScannerDriver;
 use Controllers\BalanceCacheUpdater;
 use Coinee\Sales\Purchase as CoineePurchase;
+use Coinee\ApiClient\Transfer;
 
 
 class FinalizePurchase implements Controller {
@@ -56,8 +57,24 @@ class FinalizePurchase implements Controller {
 		
 		try {
 
-//			CoineePurchase::completeTransaction($cfg, $db, $ticket);
-			CoineePurchase::completeCoineeTransaction($cfg, $db, $ticket);
+			$userEmail = 'michal@coinee.net';
+			$apiKey = '1f7780c43b0bb640c30753e3bf44cb';
+
+
+			// get current btc amount
+			$btcAmount = $ticket->recalculateBitcoinAmount()->get();
+
+			// get address for given btc amount
+			$transferResourceBase64 = $matches['transfer'];
+			$transfer = Transfer::findByResourceUrl(base64_decode($transferResourceBase64));
+			$order = $transfer->createOrder($btcAmount, $userEmail, $apiKey);
+
+
+//			print_r($order['address'] . ' x ' . $order['btcAmount']);
+//			die();
+
+			// finish the transaction
+			CoineePurchase::completeCoineeTransaction($cfg, $db, $ticket, $order['address'], $order['btcAmount']);
 
 
 			$this->notifyBalanceChange();
