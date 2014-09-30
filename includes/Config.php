@@ -11,6 +11,7 @@ class Config {
 			'walletProvider' => [],
 			'pricingProvider' => [],
 			'email' => [],
+			'coinee' => []
 		];
 	}
 	

@@ -106,9 +106,10 @@ $result = $router->resolve(
 		['/check-balance', Router::lazyLoad('Controllers\CheckBalance')],
 		
 		['/finalize/:ticket$', Router::lazyLoad('Controllers\Ajax\FinalizePurchase')],
+		['/coinee/finalize/:transfer/:ticket$', Router::lazyLoad('Coinee\Controllers\FinalizePurchase')],
 		['/ajax', Router::lazyLoad('Controllers\Ajax')],
 		['/validate/:address$', Router::lazyLoad('Controllers\Ajax\ValidateBitcoinAddress')],
-		['/coinee-get-transfer/:address$', Router::lazyLoad('Coinee\Controllers\GetTransfer')],
+		['/coinee/get-transfer/:address$', Router::lazyLoad('Coinee\Controllers\GetTransfer')],
 		['/add-email-to-ticket/:ticket', Router::lazyLoad('Controllers\Ajax\AddEmailToTicket')],
 		['/nettest', Router::lazyLoad('Controllers\NetworkTester')],
 		['/receipt/:ticket$', Router::lazyLoad('Controllers\Receipt')],
@@ -117,6 +118,7 @@ $result = $router->resolve(
 		['/coinee/purchase/:address/:ticket$', Router::lazyLoad('Coinee\Controllers\FinishPurchase')],
 		['/price$', Router::lazyLoad('Controllers\Price')],
 		['/billscan-balance/:ticket$', Router::lazyLoad('Controllers\BillScannerBalance')],
+		['/coinee/billscan-balance/:address/:ticket$', Router::lazyLoad('Coinee\Controllers\BillScannerBalance')],
 		['/email-receipt', Router::lazyLoad('Controllers\EmailReceipt')],
 		['/start-purchase/:address$', Router::lazyLoad('Controllers\Ajax\StartPurchase')],
 		

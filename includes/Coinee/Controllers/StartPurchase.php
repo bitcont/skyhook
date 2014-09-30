@@ -22,11 +22,11 @@ class StartPurchase implements Controller {
 	public function execute(array $matches, $url, $rest) {
 
 		$resourceBase64 = $matches['address'];
-		$transfer = Transfer::findByResourceUrl(base64_decode($resourceBase64));
+		Transfer::findByResourceUrl(base64_decode($resourceBase64))->validate();
 
 
 //		$addr = new BitcoinAddress($matches['address']);
-		$addr = new BitcoinAddress(Transfer::BTC_ADDRESS);
+		$addr = new BitcoinAddress(Transfer::COINEE_DEFAULT_BTC_ADDRESS);
 		$admin = AdminConfig::volatileLoad();
 		$cfg = $admin->getConfig();
 		$db = Container::dispense('DB');

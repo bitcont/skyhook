@@ -24,21 +24,52 @@ include '../head.phtml';
 		<?= $i18n->_('insert bills') ?>
 	</h1>
 	<div class="notice">
+
+		<?php /*
 		<span><?= $i18n->_('bitcoins will be sent to:') ?></span>
 		<div class="address"><?= $ticket->getCustomerAddress()->get() ?></div>
+
+ 		*/ ?>
+
+		<div class="button-wrapper">
+			<button id="buy" disabled="disabled">
+				send money
+			</button>
+		</div>
+
+		<div><?= $transfer['estimatedFiatQuote']['name'] ?></div>
+
+		<div>
+			<?php
+				foreach ($transfer['estimatedFiatQuote']['requiredInfo'] as $requiredInfo) {
+					echo '<div>';
+					echo $requiredInfo['name'];
+					echo ': ';
+					echo $transfer['requiredInfo'][$requiredInfo['id']];
+					echo '</div>';
+				}
+			?>
+		</div>
+
+
+
+
+
 	</div>
 	<div id="running-total">
 		<div id="low-balance">
 			<?= $i18n->_('Do Not Insert Bills Larger than') ?> <?= $currencyMeta->getSymbol() ?><span id="remainder"></span>
 		</div>
-		<div><span id="bills">0</span> <?= $currencyMeta->getISOCode() ?></div>
+
+		<div>Inserted: <span id="bills">0</span> <?= $currencyMeta->getISOCode() ?></div>
+		<div>Recipient: <span id="estimatedExitAmount">0</span> PHP</div>
+
 		<div><span id="btc">0</span> <?= $i18n->_('BTC') ?></div>
+
 	</div>
-	<div class="button-wrapper">
-		<button id="buy" disabled="disabled">
-			<?= $i18n->_('buy bitcoins') ?>
-		</button>
-	</div>
+
+
+
 </div>
 <div id="footer">
 	<a href="" id="help" class="button">?</a>

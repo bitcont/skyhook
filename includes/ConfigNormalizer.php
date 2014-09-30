@@ -92,6 +92,11 @@ class ConfigNormalizer {
 			'transactions' => [
 				'maximum' => @$post['transactions']['maximum'],
 			],
+			'coinee' => [
+				'email' => @$post['coinee']['email'],
+				'apiKey' => @$post['coinee']['apiKey'],
+				'bitstampId' => @$post['coinee']['bitstampId']
+			]
 		];
 		if (empty($normalized['email']['machine'])) {
 			$normalized['email']['machine'] = 'Project Skyhook 00';
@@ -131,6 +136,11 @@ class ConfigNormalizer {
 			],
 			'transaction-cron' => false,
 			'transactions' => [],
+			'coinee' => [
+				'email' => '',
+				'apiKey' => '',
+				'bitstampId' => ''
+			]
 		];
 		
 		$cfgData = $cfg->asArray();
@@ -150,6 +160,12 @@ class ConfigNormalizer {
 		if (empty($denormalized['email']['machine'])) {
 			$denormalized['email']['machine'] = 'Project Skyhook 00';
 		}
+
+
+		if (!empty($cfgData['coinee'])) {
+			$denormalized['coinee'] = $cfgData['coinee'];
+		}
+
 		
 		$denormalized['contact']['information'] = @$cfgData['contact']['information'];
 		

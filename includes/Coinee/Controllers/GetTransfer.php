@@ -2,7 +2,7 @@
 
 namespace Coinee\Controllers;
 
-use Exception;
+//use Exception;
 use Controllers\Controller;
 use AddressUtility;
 use JSON;
@@ -12,11 +12,12 @@ use Coinee\ApiClient\Transfer;
 class GetTransfer implements Controller {
 
 	public function execute(array $matches, $url, $rest) {
-		try {
 
-			$address = parse_url($matches['address'], PHP_URL_PATH);
-			$address = base64_decode($address);
-			$transfer = Transfer::findByResourceUrl($address);
+		$address = parse_url($matches['address'], PHP_URL_PATH);
+		$address = base64_decode($address);
+
+		try {
+			Transfer::findByResourceUrl($address)->validate();
 
 			echo JSON::encode([
 				'valid' => true

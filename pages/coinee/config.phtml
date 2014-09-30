@@ -1,0 +1,13 @@
+<?
+$coinee = $config['coinee'];
+$coineeInput = $simpleInput($coinee, 'coinee');
+?>
+
+<div id="coinee-settings" data-role="collapsible" data-collapsed="true">
+	<h3>
+		Coinee configuration
+	</h3>
+	<? $coineeInput('Coinee user email', 'email') ?>
+	<? $coineeInput('Coinee API key', 'apiKey') ?>
+	<? $coineeInput('Bitstamp client ID', 'bitstampId') ?>
+</div>

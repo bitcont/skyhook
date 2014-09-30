@@ -27,11 +27,12 @@ class FinishPurchase implements Controller {
 
 
 		$resourceBase64 = $matches['address'];
+//		$transfer = Transfer::findByResourceUrl(base64_decode($resourceBase64))->validate();
 		$transfer = Transfer::findByResourceUrl(base64_decode($resourceBase64));
 
 
 //		$addr = new BitcoinAddress($matches['address']);
-		$addr = new BitcoinAddress(Transfer::BTC_ADDRESS);
+		$addr = new BitcoinAddress(Transfer::COINEE_DEFAULT_BTC_ADDRESS);
 		$admin = AdminConfig::volatileLoad();
 		$cfg = $admin->getConfig();
 		
@@ -64,6 +65,7 @@ class FinishPurchase implements Controller {
 		$tmpl->render([
 			'ticket' => $ticket,
 			'config' => $cfg,
+			'transfer' => $transfer->getInfo()
 		]);
 		return true;
 	}

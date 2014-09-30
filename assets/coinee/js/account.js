@@ -74,7 +74,7 @@ $(function () {
 //			console.log('data', data);
 
 
-      $.getJSON('/coinee-get-transfer/' + btoa(data))
+      $.getJSON('/coinee/get-transfer/' + btoa(data))
       .done(function (result) {
         console.log('data', data);
 

@@ -6,7 +6,10 @@ $(function () {
 	Loading.text(_('Balance query in progress.'));
 	Loading.show();
 	
-	var ticketId = String(window.location.href).split('/').pop();
+	var urlPieces = String(window.location.href).split('/');
+  var ticketId = urlPieces.pop();
+  var transferUrlBase64 = urlPieces.pop();
+
 	var bills,
 		bitcoin;
 	
@@ -15,6 +18,8 @@ $(function () {
 		bitcoin = total.btc;
 		$('#bills').text(bills);
 		$('#btc').text(bitcoin);
+    $('#estimatedExitAmount').text(total.estimatedExitAmount);
+
 		if (typeof total.diff === "number") {
 			$('#low-balance').addClass('show');
 			$('#remainder').text(total.diff);
@@ -81,13 +86,15 @@ $(function () {
 	var handlers = {};
 	
 	handlers.totalsUpdated = function (data) {
-		if (parseFloat(data.bills) > 0) {
+    console.log(data);
+
+    if (parseFloat(data.bills) > 0) {
 			$('#buy').removeAttr('disabled').prop('disabled', false);
 			$('#canceler').attr('disabled', 'disabled').prop('disabled', true);
 			disableCanceler();
 		}
-		
-		if (bills !== data.bills) {
+
+    if (bills !== data.bills) {
 			updateTotal(data);
 		}
 	};
@@ -124,7 +131,7 @@ $(function () {
 			goodWhen: false,
 			recoverable: true,
 			text: GENERIC_ERROR_TEXT
-		},
+		}
 	};
 	
 	var canRecover = true;
@@ -181,7 +188,7 @@ $(function () {
 	
 	handlers.stateChanged = function (data) {};
 	
-	Comet.open('/billscan-balance/' + ticketId, function (data) {
+	Comet.open('/coinee/billscan-balance/' + transferUrlBase64 + '/' + ticketId, function (data) {
 		Loading.hide();
 		if (data.diff === 0 && data.bills === "0.00") {
 			window.location.replace('/admin/minimum-balance');
@@ -193,10 +200,13 @@ $(function () {
 	});
 	
 	function purchase(e) {
-		$('#buy').off(CLICK, purchase);
+
+    console.log('purchase');
+
+    $('#buy').off(CLICK, purchase);
 		Loading.text(_('Processing'));
 		Loading.show();
-		$.getJSON('/finalize/' + ticketId)
+		$.getJSON('/coinee/finalize/' + transferUrlBase64 + '/' + ticketId)
 			.done(function (response) {
 				var extra = '';
 				if (response.proceed) {
@@ -219,5 +229,10 @@ $(function () {
 			});
 		e.preventDefault();
 	}
-	$('#buy').on(CLICK, purchase);
+
+
+  console.log('bb');
+
+
+	$('#buy').on("click", purchase);
 });

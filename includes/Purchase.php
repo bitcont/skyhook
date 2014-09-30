@@ -180,7 +180,7 @@ class Purchase {
 	}
 	
 	private $initiatedAt;
-	
+
 	private function setInitiatedAt(DateTime $dt) {
 		$this->initiatedAt = $dt;
 		return $this;
@@ -189,9 +189,9 @@ class Purchase {
 	public function getInitiatedAt() {
 		return $this->initiatedAt;
 	}
-	
+
 	private $id;
-	
+
 	private function setId($id) {
 		$this->id = $id;
 		return $this;
@@ -200,9 +200,9 @@ class Purchase {
 	public function getId() {
 		return $this->id;
 	}
-	
+
 	private $bitcoinPrice;
-	
+
 	private function setBitcoinPrice(Amount $bitcoinPrice) {
 		$this->bitcoinPrice = $bitcoinPrice;
 		return $this;
@@ -211,10 +211,10 @@ class Purchase {
 	public function getBitcoinPrice() {
 		return $this->bitcoinPrice;
 	}
-	
+
 	private $addr;
-	
-	private function setCustomerAddress(BitcoinAddress $addr) {
+
+	public function setCustomerAddress(BitcoinAddress $addr) {
 		$this->addr = $addr;
 		return $this;
 	}
@@ -222,7 +222,7 @@ class Purchase {
 	public function getCustomerAddress() {
 		return $this->addr;
 	}
-	
+
 	private $currencyAmount;
 	
 	public function setCurrencyAmount(Amount $amt) {
@@ -239,9 +239,9 @@ class Purchase {
 	public function getCurrencyAmount() {
 		return $this->currencyAmount;
 	}
-	
+
 	private $bitcoinAmount;
-	
+
 	private function setBitcoinAmount(Amount $amt) {
 		$this->bitcoinAmount = $amt;
 		return $this;
@@ -257,7 +257,7 @@ class Purchase {
 	public function getBitcoinAmount() {
 		return $this->bitcoinAmount;
 	}
-	
+
 	private $status;
 	
 	public function setStatus($status) {
@@ -268,25 +268,25 @@ class Purchase {
 	public function getStatus() {
 		return $this->status;
 	}
-	
+
 	private $txid;
 	
 	public function getTXID() {
 		return $this->txid;
 	}
-	
-	private function setTXID($txid) {
+
+	public function setTXID($txid) {
 		$this->txid = $txid;
 		return $this;
 	}
-	
+
 	private $ntxid;
 	
 	public function getNTXID() {
 		return $this->ntxid;
 	}
-	
-	private function setNTXID($ntxid) {
+
+	public function setNTXID($ntxid) {
 		$this->ntxid = $ntxid;
 		return $this;
 	}
@@ -295,9 +295,9 @@ class Purchase {
 		return $this->getStatus() === Purchase::COMPLETE
 			&& $this->getTXID() !== null;
 	}
-	
+
 	private $finalizedAt;
-	
+
 	private function setFinalizedAt(DateTime $dt) {
 		$this->finalizedAt = $dt;
 		return $this;
@@ -306,9 +306,9 @@ class Purchase {
 	public function getFinalizedAt() {
 		return $this->finalizedAt;
 	}
-	
+
 	private $currency;
-	
+
 	private function setCurrency($c) {
 		//$c = strtoupper($c);
 		return $this;
@@ -325,21 +325,21 @@ class Purchase {
 	public function getCurrency() {
 		return $this->currency;
 	}
-	
+
 	private $config;
-	
+
 	private function setConfig(Config $cfg) {
 		$this->config = $cfg;
 		return $this;
 	}
-	
+
 	private function getConfig() {
 		return $this->config;
 	}
-	
+
 	private $message;
-	
-	private function setMessage($msg) {
+
+	public function setMessage($msg) {
 		$this->message = $msg;
 		return $this;
 	}
@@ -347,10 +347,10 @@ class Purchase {
 	public function getMessage() {
 		return $this->message;
 	}
-	
+
 	private $notice;
-	
-	private function setNotice($msg) {
+
+	public function setNotice($msg) {
 		$this->notice = $msg;
 		return $this;
 	}
