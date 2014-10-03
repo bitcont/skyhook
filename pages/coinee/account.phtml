@@ -14,10 +14,10 @@ include '../head.phtml';
 	<?= file_get_contents(Localization::path("help.html")); ?>
 	<a href="#" class="closer button">&times;</a>
 </div>
-<div class="price">
-	<div class="crypto-amount">1 <?= $i18n->_('bitcoin') ?></div>
-	<div class="fiat-amount"><?= $i18n->_('...') ?></div>
-</div>
+<!--<div class="price">-->
+<!--	<div class="crypto-amount">1 --><?//= $i18n->_('bitcoin') ?><!--</div>-->
+<!--	<div class="fiat-amount">--><?//= $i18n->_('...') ?><!--</div>-->
+<!--</div>-->
 <div id="qr-scanner">
 	<video id="video" width="480" height="360"></video>
 	<canvas id="qr-canvas"></canvas>

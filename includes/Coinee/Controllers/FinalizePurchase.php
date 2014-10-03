@@ -57,8 +57,9 @@ class FinalizePurchase implements Controller {
 		
 		try {
 
-			$userEmail = 'michal@coinee.net';
-			$apiKey = '1f7780c43b0bb640c30753e3bf44cb';
+			$coineeConfig = $cfg->getCoinee();
+			$userEmail = $coineeConfig['email'];
+			$apiKey = $coineeConfig['apiKey'];
 
 
 			// get current btc amount
@@ -69,17 +70,20 @@ class FinalizePurchase implements Controller {
 			$transfer = Transfer::findByResourceUrl(base64_decode($transferResourceBase64));
 			$order = $transfer->createOrder($btcAmount, $userEmail, $apiKey);
 
-
-//			print_r($order['address'] . ' x ' . $order['btcAmount']);
-//			die();
-
 			// finish the transaction
-			CoineePurchase::completeCoineeTransaction($cfg, $db, $ticket, $order['address'], $order['btcAmount']);
+			CoineePurchase::completeCoineeTransaction($cfg, $db, $ticket, $order['payToAddress'], $order['btcAmount']);
+			$response['orderId'] = $order['id'];
 
 
 			$this->notifyBalanceChange();
 			$response['proceed'] = true;
+
 		} catch (Exception $e) {
+
+
+//			throw $e;
+
+
 			if ($e instanceof InsufficientFundsException) {
 				$response['insufficient'] = true;
 			}

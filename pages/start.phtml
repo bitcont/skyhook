@@ -1,6 +1,6 @@
 <?php
 $title = 'Project Skyhook';
-$styles = ['/assets/css/skyhook.css', '/assets/coinee/css/style.css'];
+$styles = ['/assets/css/skyhook.css', '/assets/coinee/css/start.css'];
 $classes = ['start'];
 include 'head.phtml';
 ?>
@@ -12,11 +12,23 @@ include 'head.phtml';
 
 
 <div class="half-screen buy-btc">
-	buy btc
+	<p class="start-text">
+		buy bitcoin
+		<br />
+		(
+		<span class="crypto-amount">1 <?= $i18n->_('bitcoin') ?></span>
+		=
+		<span class="fiat-amount"><?= $i18n->_('...') ?></span>
+		)
+	</p>
+	<img class="start-logo" src="./assets/coinee/images/bitcoin.png" />
 </div>
 
 <div class="half-screen coinee">
-	coinee
+	<p class="start-text">
+		send money with Coinee
+	</p>
+	<img class="start-logo" src="./assets/coinee/images/logo.png" />
 </div>
 
 
@@ -27,10 +39,10 @@ include 'head.phtml';
 	<?= file_get_contents(Localization::path("help.html")); ?>
 	<a href="#" class="closer button">&times;</a>
 </div>
-<div class="price">
-	<div class="crypto-amount">1 <?= $i18n->_('bitcoin') ?></div>
-	<div class="fiat-amount"><?= $i18n->_('...') ?></div>
-</div>
+<!--<div class="price">-->
+<!--	<div class="crypto-amount">1 --><?//= $i18n->_('bitcoin') ?><!--</div>-->
+<!--	<div class="fiat-amount">--><?//= $i18n->_('...') ?><!--</div>-->
+<!--</div>-->
 <div id="footer">
 	<a href="" id="help" class="button">?</a>
 </div>

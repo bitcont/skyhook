@@ -9,7 +9,7 @@ use Controllers\ScannerStopper;
 use Controllers\BalanceCacheUpdater;
 
 
-class Start implements Controller {
+class Account implements Controller {
 	use ScannerStopper;
 	use BalanceCacheUpdater;
 	
@@ -18,8 +18,8 @@ class Start implements Controller {
 		$this->notifyBalanceChange();
 		$admin = AdminConfig::volatileLoad();
 		$contactInfo = $admin->getConfig()->getContactInformation();
-		
-		$tmpl = new Template('coinee/start');
+
+		$tmpl = new Template('coinee/account');
 		$tmpl->render([
 			'contactInfo' => $contactInfo,
 		]);

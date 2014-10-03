@@ -1,0 +1,31 @@
+
+
+html, body {
+	height: 100%;
+	background-image: none !important
+}
+
+html.start body {
+	/*background-image: none !important;*/
+}
+
+div.half-screen {
+	height: 50%;
+}
+
+div.coinee {
+	background-color: #3399f3;
+	padding-top: 10px;
+}
+
+img.start-logo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50%;
+}
+
+p.start-text {
+	text-align: center;
+	font-weight: bold;
+}

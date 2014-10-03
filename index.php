@@ -113,6 +113,7 @@ $result = $router->resolve(
 		['/add-email-to-ticket/:ticket', Router::lazyLoad('Controllers\Ajax\AddEmailToTicket')],
 		['/nettest', Router::lazyLoad('Controllers\NetworkTester')],
 		['/receipt/:ticket$', Router::lazyLoad('Controllers\Receipt')],
+		['/coinee/receipt/:transfer/:order/:ticket$', Router::lazyLoad('Coinee\Controllers\Receipt')],
 		['/error/:ticket$', Router::lazyLoad('Controllers\Error')],
 		['/purchase/:address/:ticket$', Router::lazyLoad('Controllers\FinishPurchase')],
 		['/coinee/purchase/:address/:ticket$', Router::lazyLoad('Coinee\Controllers\FinishPurchase')],
@@ -127,7 +128,7 @@ $result = $router->resolve(
 		
 		['/start$', Router::lazyLoad('Controllers\Start')],
 		['/account$', Router::lazyLoad('Controllers\Account')],
-		['/coinee-start$', Router::lazyLoad('Coinee\Controllers\Start')],
+		['/coinee/account$', Router::lazyLoad('Coinee\Controllers\Account')],
 		['/purchase/:address$', Router::lazyLoad('Controllers\StartPurchase')],
 		['/coinee/purchase/:address$', Router::lazyLoad('Coinee\Controllers\StartPurchase')],
 		['/bust$', Router::lazyLoad('Controllers\CacheBust')],

@@ -80,7 +80,7 @@ $(function () {
 
         if (result.valid) {
           console.log('valid');
-          window.location.replace('coinee/purchase/' + btoa(data));
+          window.location.replace('/coinee/purchase/' + btoa(data));
         }
       })
       .always(function () {

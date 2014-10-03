@@ -14,11 +14,16 @@ $(function () {
 		bitcoin;
 	
 	function updateTotal(total) {
-		bills = total.bills;
+
+    bills = total.bills;
 		bitcoin = total.btc;
 		$('#bills').text(bills);
 		$('#btc').text(bitcoin);
     $('#estimatedExitAmount').text(total.estimatedExitAmount);
+
+
+    if (parseFloat(total.estimatedExitAmount) > 0) $('#estimated-fiat-quote').hide();
+
 
 		if (typeof total.diff === "number") {
 			$('#low-balance').addClass('show');
@@ -208,9 +213,15 @@ $(function () {
 		Loading.show();
 		$.getJSON('/coinee/finalize/' + transferUrlBase64 + '/' + ticketId)
 			.done(function (response) {
+
+
+        console.log(response);
+
+
 				var extra = '';
 				if (response.proceed) {
-					window.location.replace('/receipt/' + ticketId);
+//					window.location.replace('/receipt/' + ticketId);
+          window.location.replace('/coinee/receipt/' + transferUrlBase64 + '/'+ response.orderId + '/'+ ticketId);
 					return;
 				}
 				if (response.redirect) {

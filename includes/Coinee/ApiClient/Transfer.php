@@ -166,12 +166,26 @@ class Transfer {
 		$result = json_decode($response->getResponse(), TRUE);
 
 		// coins.ph quote must not be too much different than skyhook quote
-		if (abs(floatval($result['payload']['btc_amount']) - floatval($btcAmount)) > 0.0001) throw new Exception('Bigger than allowed BTC amount mismatch');
+		if (abs(floatval($result['btcAmount']) - floatval($btcAmount)) > 0.0001) throw new Exception('Bigger than allowed BTC amount mismatch');
 
-		return array(
-			'address' => $result['payload']['wallet_address'],
-			'btcAmount' => $result['payload']['btc_amount']
-		);
+		return $result;
+	}
+
+
+	/**
+	 * Changes order status to paid.
+	 *
+	 * @param string $orderId
+	 * @param string $userEmail
+	 * @param string $apiKey
+	 */
+	public function orderPaid($orderId, $userEmail, $apiKey)
+	{
+		$userEmail = urlencode($userEmail);
+		$url = $this->url . "/$orderId?userEmail=$userEmail&apiKey=$apiKey";
+
+		$request = new Request($url);
+		$request->get();
 	}
 
 

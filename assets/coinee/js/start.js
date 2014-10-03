@@ -7,7 +7,7 @@ $(document).ready(function() {
 	}
 
   function goToCoineeStartPage() {
-    window.location.replace('/coinee-start');
+    window.location.replace('/coinee/account');
   }
 	
 	function bind() {

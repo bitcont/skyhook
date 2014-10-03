@@ -1,8 +1,10 @@
 <?php
 
 class Config {
+	use Coinee\Traits\Config;
+
+
 	private $data;
-	
 	private $walletProvider;
 	private $pricingProvider;
 	

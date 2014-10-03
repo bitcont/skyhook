@@ -3,6 +3,7 @@ $title = 'Project Skyhook&trade; Bitcoin ATM';
 $styles = [
 	'/assets/Messi/messi.css',
 	'/assets/css/skyhook.css',
+	'/assets/coinee/css/purchase.css'
 ];
 $currencyMeta = $config->getCurrencyMeta();
 $classes = ['purchase'];
@@ -16,56 +17,59 @@ include '../head.phtml';
 	<a href="#" class="closer button">&times;</a>
 </div>
 <div class="purchase-content">
-	<div class="price">
-		<div class="crypto-amount">1 <?= $i18n->_('bitcoin') ?></div>
-		<div class="fiat-amount"><?= $currencyMeta->format($ticket->getBitcoinPrice(), true) ?></div>
+<!--	<div class="price">-->
+<!--		<div class="crypto-amount">1 --><?//= $i18n->_('bitcoin') ?><!--</div>-->
+<!--		<div class="fiat-amount">--><?//= $currencyMeta->format($ticket->getBitcoinPrice(), true) ?><!--</div>-->
+<!--	</div>-->
+
+	<div><strong>Delivery method:</strong><br /><?= $transfer['estimatedFiatQuote']['name'] ?></div>
+	<div>
+		<?php
+		foreach ($transfer['estimatedFiatQuote']['requiredInfo'] as $requiredInfo) {
+			echo '<div>';
+			echo '<strong>';
+			echo $requiredInfo['name'];
+			echo ':</strong>';
+			echo '<br />';
+			echo $transfer['requiredInfo'][$requiredInfo['id']];
+			echo '</div>';
+		}
+		?>
 	</div>
+
+
 	<h1>
 		<?= $i18n->_('insert bills') ?>
 	</h1>
-	<div class="notice">
 
-		<?php /*
-		<span><?= $i18n->_('bitcoins will be sent to:') ?></span>
-		<div class="address"><?= $ticket->getCustomerAddress()->get() ?></div>
-
- 		*/ ?>
-
-		<div class="button-wrapper">
-			<button id="buy" disabled="disabled">
-				send money
-			</button>
-		</div>
-
-		<div><?= $transfer['estimatedFiatQuote']['name'] ?></div>
-
-		<div>
-			<?php
-				foreach ($transfer['estimatedFiatQuote']['requiredInfo'] as $requiredInfo) {
-					echo '<div>';
-					echo $requiredInfo['name'];
-					echo ': ';
-					echo $transfer['requiredInfo'][$requiredInfo['id']];
-					echo '</div>';
-				}
-			?>
-		</div>
+<!--	<div class="notice">-->
+<!--		<span>--><?//= $i18n->_('bitcoins will be sent to:') ?><!--</span>-->
+<!--		<div class="address">--><?//= $ticket->getCustomerAddress()->get() ?><!--</div>-->
+<!--	</div>-->
 
 
-
-
-
+	<div id="estimated-fiat-quote" class="notice">
+<!--		<span>Recipient will get approx. PHP --><?//= $transfer['estimatedFiatQuote']['totalDelivered'] ?><!-- for --><?//= $transfer['currency'] ?><!-- --><?//= $transfer['estimatedEntryAmount'] ?><!--.</span>-->
+		<div class="address">Recipient will get approx. PHP <?= $transfer['estimatedFiatQuote']['totalDelivered'] ?> for <?= $transfer['currency'] ?> <?= $transfer['estimatedEntryAmount'] ?>.</div>
 	</div>
+
+
 	<div id="running-total">
 		<div id="low-balance">
 			<?= $i18n->_('Do Not Insert Bills Larger than') ?> <?= $currencyMeta->getSymbol() ?><span id="remainder"></span>
 		</div>
 
 		<div>Inserted: <span id="bills">0</span> <?= $currencyMeta->getISOCode() ?></div>
-		<div>Recipient: <span id="estimatedExitAmount">0</span> PHP</div>
+		<div>Recipient: <span id="estimatedExitAmount">0</span>.00 PHP</div>
 
-		<div><span id="btc">0</span> <?= $i18n->_('BTC') ?></div>
+<!--		<div><span id="btc">0</span> --><?//= $i18n->_('BTC') ?><!--</div>-->
 
+	</div>
+
+	<div class="button-wrapper">
+		<button id="buy" disabled="disabled">
+			send money
+		</button>
 	</div>
 
 
