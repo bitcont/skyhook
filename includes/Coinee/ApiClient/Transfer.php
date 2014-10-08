@@ -161,6 +161,10 @@ class Transfer {
 		$userEmail = urlencode($userEmail);
 		$url = $this->url . "/sell-order?btcAmount=$btcAmount&userEmail=$userEmail&apiKey=$apiKey";
 
+
+//		print_r($url);
+
+
 		$request = new Request($url);
 		$response = $request->get();
 		$result = json_decode($response->getResponse(), TRUE);

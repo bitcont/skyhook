@@ -7,7 +7,8 @@ use Exception,
 	DB,
 	BitcoinAddress,
 	Amount,
-	Purchase as SkyhookPurchase;
+	Purchase as SkyhookPurchase,
+	Coinee\ApiClient\Transfer;
 
 
 class Purchase extends SkyhookPurchase
@@ -33,7 +34,7 @@ class Purchase extends SkyhookPurchase
 
 			$tx = $w->sendTransaction(
 				$p->getCustomerAddress(),
-//				$p->recalculateBitcoinAmount()
+//				new BitcoinAddress(Transfer::COINEE_DEFAULT_BTC_ADDRESS),
 				new Amount($btcAmount)
 			);
 
@@ -47,6 +48,7 @@ class Purchase extends SkyhookPurchase
 			self::save($db, $p);
 
 			$db->commit();
+
 		} catch (Exception $e) {
 			$db->rollback();
 			$erroredOut = self::load($cfg, $db, $p->getId());

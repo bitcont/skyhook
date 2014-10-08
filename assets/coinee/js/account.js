@@ -74,6 +74,12 @@ $(function () {
 //			console.log('data', data);
 
 
+
+      Loading.text(_('Processing'));
+      Loading.show();
+
+
+
       $.getJSON('/coinee/get-transfer/' + btoa(data))
       .done(function (result) {
         console.log('data', data);
